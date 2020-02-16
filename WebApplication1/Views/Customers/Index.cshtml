@@ -5,31 +5,32 @@
 }
 
 <h2>Index</h2>
+<a href="@Url.Action("Create")">Add Customer</a>
 
 <table class="table">
     <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Membership Type</th>
-            <th scope="col">Birth Date</th>
-        </tr>
+    <tr>
+        <th scope="col">Edit</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Membership Type</th>
+        <th scope="col">Birth Date</th>
+        <th scope="col"></th>
+    </tr>
     </thead>
     <tbody>
-       @foreach (var customer in Model)
-       {
+    @foreach (var customer in Model)
+    {
         <tr>
-            <th scope="row">@customer.Id</th>
+            <th scope="row"><a href="@Url.Action("Edit", "Customers", new{id = customer.Id})">@customer.Id</a></th>
             <td>@customer.FirstName</td>
             <td>@customer.LastName</td>
             <td>@customer.Email</td>
-            @*<td>@customer.MembershipType.Name</td>*@
+            <td>@customer.MembershipType.Name</td>
             <td>@customer.BirthDate</td>
+            <td><a href="@Url.Action("Delete", "Customers", new{id = customer.Id} )">Delete</a></td>
         </tr>
-       }
-   
-
+    }
     </tbody>
 </table>

@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
     public class CustomersController : Controller
     {
-        WebAppContext db = new WebAppContext();
+        private readonly CustomerRepository _custumeRepository;
+        private readonly WebAppContext _context;
+        
+
+        public CustomersController()
+        {
+            _context = new WebAppContext();
+            _custumeRepository = new CustomerRepository(_context);
+        }
 
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = db.Customers.ToList();
+            var customers = _custumeRepository.GetCustomers();
             return View(customers);
         }
 
@@ -23,7 +33,7 @@ namespace WebApplication1.Controllers
         public ActionResult Create()
         {
             var customerViewModel = new CustomersViewModel();
-            var membershipType = db.MembershipTypes.ToList();
+            var membershipType = _custumeRepository.GetMembershipTypes();
             customerViewModel.MembershipTypes = membershipType;
             customerViewModel.Customer = new Customer();        
             return View(customerViewModel);
@@ -35,8 +45,8 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
             }
            return RedirectToAction("Index");
         }
@@ -44,19 +54,28 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var customerViewModel = new CustomersViewModel();
+            customerViewModel.Customer = _custumeRepository.GetCustomerById(id);
+            customerViewModel.MembershipTypes = _custumeRepository.GetMembershipTypes();
+            return View(customerViewModel);
         }
 
 
         [HttpPost]
         public ActionResult Edit(Customer customer)
         {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(customer).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
-        [HttpDelete]
+        
         public ActionResult Delete(int id)
         {
+            _custumeRepository.DeleteCustomer(id);
             return RedirectToAction("Index");
         }
 
