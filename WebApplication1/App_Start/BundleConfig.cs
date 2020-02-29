@@ -25,6 +25,15 @@ namespace WebApplication1
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/dataTables.css").Include(
+                "~/Content/jquery.dataTables.bootstrap4.min.css",
+                "~/Content/jquery.dataTables.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery.dataTables.js").Include(
+                "~/Scripts/jquery.dataTables.min.js",
+                "~/Scripts/jquery.dataTables.bootstrap4.min.js"));
+
         }
     }
 }
