@@ -15,7 +15,7 @@ namespace WebApplication1.Repositories
             _context = context;
         }
 
-        public List<Customer> GetCustomers()
+        public IEnumerable<Customer> GetCustomers()
         {
             return _context.Customers.Include(c => c.MembershipType).ToList();
 

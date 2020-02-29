@@ -142,6 +142,10 @@
     <Compile Include="Migrations\202002151709036_InitialMigration.designer.cs">
       <DependentUpon>202002151709036_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002291452460_AddValidationToCustomer.cs" />
+    <Compile Include="Migrations\202002291452460_AddValidationToCustomer.designer.cs">
+      <DependentUpon>202002291452460_AddValidationToCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -210,6 +214,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202002151709036_InitialMigration.resx">
       <DependentUpon>202002151709036_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002291452460_AddValidationToCustomer.resx">
+      <DependentUpon>202002291452460_AddValidationToCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
