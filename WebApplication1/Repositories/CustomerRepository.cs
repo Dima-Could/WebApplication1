@@ -18,7 +18,6 @@ namespace WebApplication1.Repositories
         public IEnumerable<Customer> GetCustomers()
         {
             return _context.Customers.Include(c => c.MembershipType).ToList();
-
         }
 
         public List<MembershipType> GetMembershipTypes()
@@ -38,6 +37,15 @@ namespace WebApplication1.Repositories
             var customer = GetCustomerById(id);
             _context.Customers.Remove(customer);
             _context.SaveChanges();
+        }
+
+        public IEnumerable<Customer> GetBirthDateCustomers()
+        {
+            var today = DateTime.Today;
+            var allcustomers = _context.Customers.ToList();
+            var todayBirth = _context.Customers.Where(b => b.BirthDate.Value.Day == today.Day && b.BirthDate.Value.Month == today.Month).ToList();
+
+            return todayBirth;
         }
     }
 }

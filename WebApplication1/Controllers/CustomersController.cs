@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
@@ -15,7 +11,6 @@ namespace WebApplication1.Controllers
         private readonly CustomerRepository _custumeRepository;
         private readonly WebAppContext _context;
         
-
         public CustomersController()
         {
             _context = new WebAppContext();
@@ -39,7 +34,6 @@ namespace WebApplication1.Controllers
             return View(customerViewModel);
         }
 
-
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
@@ -54,9 +48,11 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var customerViewModel = new CustomersViewModel();
-            customerViewModel.Customer = _custumeRepository.GetCustomerById(id);
-            customerViewModel.MembershipTypes = _custumeRepository.GetMembershipTypes();
+            var customerViewModel = new CustomersViewModel
+            {
+                Customer = _custumeRepository.GetCustomerById(id),
+                MembershipTypes = _custumeRepository.GetMembershipTypes()
+            };
             return View(customerViewModel);
         }
 
@@ -71,13 +67,11 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("Index");
         }
-
         
         public ActionResult Delete(int id)
         {
             _custumeRepository.DeleteCustomer(id);
             return RedirectToAction("Index");
         }
-
     }
 }

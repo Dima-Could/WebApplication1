@@ -30,3 +30,7 @@ textarea {
     border: 2px solid red;
 }
 
+.form-control {
+    border: 1px solid #89a5be;
+}
+
