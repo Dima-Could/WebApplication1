@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using System.Web.Mvc;
+using AutoMapper;
+using WebApplication1.Dtos;
 using WebApplication1.Models;
 
 namespace WebApplication1.Repositories
@@ -15,9 +18,9 @@ namespace WebApplication1.Repositories
             _context = context;
         }
 
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.Include(c => c.MembershipType).ToList();
+            return _context.Customers.Include(c => c.MembershipType).ToList().Select(Mapper.Map<Customer, CustomerDto>);
         }
 
         public List<MembershipType> GetMembershipTypes()
@@ -42,7 +45,6 @@ namespace WebApplication1.Repositories
         public IEnumerable<Customer> GetBirthDateCustomers()
         {
             var today = DateTime.Today;
-            var allcustomers = _context.Customers.ToList();
             var todayBirth = _context.Customers.Where(b => b.BirthDate.Value.Day == today.Day && b.BirthDate.Value.Month == today.Month).ToList();
 
             return todayBirth;

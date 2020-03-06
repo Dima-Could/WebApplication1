@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
@@ -20,7 +21,7 @@ namespace WebApplication1.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = _custumeRepository.GetCustomers();
+            var customers = _custumeRepository.GetCustomers().ToList();
             return View(customers);
         }
 
@@ -67,7 +68,7 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("Index");
         }
-        
+
         public ActionResult Delete(int id)
         {
             _custumeRepository.DeleteCustomer(id);

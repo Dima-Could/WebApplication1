@@ -8,7 +8,7 @@ namespace WebApplication1.ViewModels
 {
     public class CustomersIndexViewModel
     {
-        public List<Customer> CustomersList { get; set; }
+        public IEnumerable<Customer> CustomersList { get; set; }
 
     }
 }

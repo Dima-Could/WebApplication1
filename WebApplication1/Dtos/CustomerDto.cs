@@ -1,34 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.ExceptionServices;
-using Microsoft.Ajax.Utilities;
+using System.Linq;
+using System.Web;
+using WebApplication1.Models;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Dtos
 {
-    public class Customer
+    public class CustomerDto
     {
         public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
-        [Display(Name = "First Name")]
-        public string  FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [StringLength(100)]
-        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
         [StringLength(200)]
         public string Email { get; set; }
 
-        [Display(Name = "Date of Birth")]
         public DateTime? BirthDate { get; set; }
         public MembershipType MembershipType { get; set; }
 
-        [Display(Name = "Membership Type")]
         public int MembershipTypeId { get; set; }
-
     }
 }
